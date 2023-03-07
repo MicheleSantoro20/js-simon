@@ -24,6 +24,8 @@ const tempoAttesa = 5;
 setTimeout(function() {
     targetDom.classList.add('hide');
 
+
+    // Il secondo timeout serve ad annullare la proprietà di Hoisting presente nel prompt (dato che all'inserimento del numero erano ancora visibili i numeri casuali)
     setTimeout(function() {
         for (let c = 0; c < 5; c++) {
             
@@ -32,13 +34,23 @@ setTimeout(function() {
             numeriInseriti.push(emettiNumeri);
             console.log (numeriInseriti) ;
 
-            numeriInseriti = document.getElementById (`numeroScelto${c+1}`);
+            const numeriScelti = document.getElementById (`numeroScelto${c+1}`);
+            numeriScelti.innerHTML = `${c+1} Numero scelto = ${emettiNumeri}` ;
+
+
+            if (casualNumber.includes(emettiNumeri)) {
+                console.log (`Il numero ${emettiNumeri} è stato indovinato`);
+                numeriScelti.innerHTML = `Il Numero scelto  "${emettiNumeri}" è stato indovintato `;
+            } else {
+                numeriScelti.innerHTML = `Il Numero scelto  "${emettiNumeri}" è NON stato indovintato `;
+            }
 
 
 
         
         }
     }, tempoAttesa * 50);
+
 }, tempoAttesa * 1000);
 
 
